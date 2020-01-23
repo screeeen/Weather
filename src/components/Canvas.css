@@ -1,0 +1,67 @@
+
+
+.canvas {
+  height: 100vh;
+  width: 100vw;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
+}
+
+.text {
+  margin: auto 0;
+  color:whitesmoke;
+  text-shadow: darkslategrey;
+}
+
+.location {
+  font-size: 104px;
+}
+
+.temperature-chart {
+  display: flex;
+  flex-flow: row wrap;
+  border:1px solid red; 
+}
+
+.temperature {
+  
+  font-size: 72px;
+  border:1px solid blue; 
+  margin: auto 0;
+}
+
+.temperature-min-max{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.temperature-min-max>p{
+  font-size: 14px;
+  border:1px solid yellow; 
+  margin: auto 0;
+}
+
+.week-chart {
+  border:1px solid blue; 
+  width: 100%;
+background-color: white;
+border-radius: 15px;
+padding: 20px;
+position: absolute;
+bottom: 0;
+left: 0;
+}
+
+img {
+  width: 38%;
+  height: 38%;
+  margin: auto;
+}
+
+.week-chart>p {
+  margin: 33px;
+}
