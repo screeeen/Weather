@@ -1,15 +1,14 @@
 import React from 'react'
-
 import './Canvas.css'
 
-export default function Temperature() {
+export default function Temperature(props) {
   return (
-    <div className="temperature-chart">
-      <p className="temperature">30º</p>
-      <div className="temperature-min-max">
-        <p className="temperature">50º</p>
-        <p className="temperature">3º</p>
+      <div className="temperature-chart" >
+        <p className="temperature">{props.temp}</p>
+        <div className="temperature-min-max">
+          <p className="temperature">{props.temp_max}</p>
+          <p className="temperature">{props.temp_min}</p>
+        </div>
       </div>
-    </div>
   )
 }

@@ -2,10 +2,11 @@ import React from 'react'
 
 import './Canvas.css'
 
-function Location() {
+function Location(props) {
+
   return (
     <>
-      <p>Location</p>
+      <p className="location">{props.name}</p>
     </>
   )
 }
