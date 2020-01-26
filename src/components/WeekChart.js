@@ -3,11 +3,21 @@ import React from 'react'
 import Sun from './sun.svg'
 import './Canvas.css'
 
-export default function WeekChart() {
+export default function WeekChart(props) {
 
   return (
     <>
-      <table className="week-chart">
+      <table>
+        <tbody>
+          <tr>
+            <td>{props.temp}</td>
+            <td><img src={Sun} alt="sun" /></td>
+            <td>{props.temp_max}</td>
+            <td>{props.temp_min}</td>
+          </tr>
+        </tbody>
+      </table>
+      {/* <table className="week-chart">
       <tbody>
         <tr>
           <td>Monday</td>
@@ -52,7 +62,7 @@ export default function WeekChart() {
           <td>0º</td>
         </tr>
         </tbody>
-      </table>
+      </table> */}
     </>
   )
 }
