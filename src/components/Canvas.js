@@ -3,6 +3,7 @@ import Location from './Location'
 import WeatherDescription from './WeatherDescription'
 import FeelsLike from './FeelsLike'
 import Temperature from './Temperature'
+import SunSetRise from './SunSetRise'
 import AnimationOfWeather from './AnimationOfWeather'
 import WeekChart from './WeekChart'
 import './Canvas.css'
@@ -62,10 +63,14 @@ class Canvas extends Component {
   }
 
   generateForecast = () => {
-    // return this.state.data.
-    // this.state.data.list.map((day, index) => {
-    //   return <span key={index}> {day.value} </span>
-    // })
+    return <table >
+      <tbody className="week-chart">
+        {this.state.data.list.map((day, index) => {
+          {/* console.log(day); */}
+          return <WeekChart key={index} temp={day.main.temp} temp_max={day.main.temp_max} temp_min={day.main.temp_min} />
+        })}
+      </tbody>
+    </table>
   }
 
   render() {
@@ -80,14 +85,10 @@ class Canvas extends Component {
             <WeatherDescription description={this.state.data.list[0].weather[0].description} />
             <FeelsLike feelsLike={this.state.data.list[0].main.feels_like.toFixed(0)} />
             <Temperature temp={this.state.data.list[0].main.temp.toFixed(0)} temp_max={this.state.data.list[0].main.temp_max.toFixed(0)} temp_min={this.state.data.list[0].main.temp_min.toFixed(0)} />
+            <SunSetRise sunset={this.state.data.city.sunset} sunrise={this.state.data.city.sunrise} />
             {/* <AnimationOfWeather /> */}
             {this.generateForecast()}
 
-            {this.state.data.list.map((day, index) => {
-              console.log(day);
-              
-              return <WeekChart key={index} temp={day.main.temp} temp_max={day.main.temp_max} temp_min={day.main.temp_min} />
-            })}
           </>)
           :
           (<p>loading...</p>)
