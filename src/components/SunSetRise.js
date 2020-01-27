@@ -6,8 +6,8 @@ export default function SunSetRise(props) {
     <table >
       <tbody>
       <tr>
-        <td>{props.sunset.toDate()}</td>
-        <td>{props.sunrise.toFixed(0)}</td>
+        <td>Sunrise: {props.sunrise}</td>
+        <td>Sunset: {props.sunset}</td>
       </tr>
       </tbody>
         </table>

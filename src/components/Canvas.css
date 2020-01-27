@@ -11,44 +11,59 @@
 .text {
   margin: auto 0;
   color: whitesmoke;
-  text-shadow: darkslategrey;
+  /* border: 1px solid gray; */
 }
 
-.weather-desc{
+/* .degrees {
+  font-size: 48px;
+  top:0;
+  position:relative;
+} */
+
+.weather-desc {
   font-size: 12px;
+  margin: 6px 2px;
+  /* border: 1px solid yellow; */
 }
 
 .location {
-  font-size: 18px;
+  font-size: 38px;
+  margin: 0 auto;
+  color: white;
+  text-shadow: deeppink 0px 2px 1px;
 }
 
 .temperature-chart {
   display: flex;
   flex-flow: row wrap;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .temperature {
   font-size: 72px;
-  border: 1px solid blue;
-  margin: auto 0;
+  /* border: 1px solid blue; */
+  margin: 0;
+  z-index: 10;
+
 }
 
 .temperature-min-max {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 1;
+
 }
 
 .temperature-min-max > p {
   font-size: 14px;
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   margin: auto 0;
 }
 
 .week-chart {
   width: 100%;
-  background-color:#FFF;
+  background-color: #fff;
   border-radius: 15px;
   padding: 20px;
   position: absolute;
@@ -58,8 +73,27 @@
   box-shadow: dimgray;
 }
 
-td {
-text-align: right;
+.day-chart {
+  text-align: left;
+}
+
+.temp-chart {
+  text-align: right;
+  padding: 0 10px
+}
+
+.icon-chart {
+  text-align: center;
+}
+
+.max-chart {
+  text-align: right;
+  padding: 0 10px
+}
+
+.min-chart {
+  text-align: right;
+  padding: 0 10px
 }
 
 img {
@@ -70,4 +104,17 @@ img {
 
 .week-chart > p {
   margin: 33px;
+}
+
+.cube-container{
+  transform: rotate(30deg);
+}
+
+.cube {
+margin: 100px auto;
+height: 86px;
+width: 100px;
+background-color: lightblue;
+transform: skew(-30deg);
+box-shadow: 6px 6px 1px 1px rgba(0, 0, 255, .2);
 }
