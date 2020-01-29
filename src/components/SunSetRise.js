@@ -1,17 +1,12 @@
 import React from 'react'
 
+import './Canvas.css'
+
+
 export default function SunSetRise(props) {
   return (
-    <div>
-    <table >
-      <tbody>
-      <tr>
-        <td>Sunrise: {props.sunrise}</td>
-        <td>Sunset: {props.sunset}</td>
-      </tr>
-      </tbody>
-        </table>
-        
+    <div className="sun-desc">
+        <p>Sunrise: {props.sunrise} · Sunset: {props.sunset}</p>        
     </div>
   )
 }

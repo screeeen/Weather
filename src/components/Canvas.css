@@ -11,8 +11,7 @@
   }
 } */
 
-
-vars{
+vars {
   --yellow: #00ff00;
 }
 
@@ -22,7 +21,7 @@ vars{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10vh;
+  padding: 10vh 10vw 0;
   /* transform: rotateX(60deg) rotateY(0deg) rotateZ(-45deg); */
 }
 
@@ -36,13 +35,29 @@ vars{
   font-size: 12px;
   margin: 6px 2px;
   /* border: 1px solid yellow; */
+  color: white;
+}
+
+.sun-desc {
+  font-size: 14px;
+  margin-top: 6px;
+  margin-bottom: -16px;
+  z-index: 10;
+  font-weight: bolder;
+  align-self: flex-start;
+  display: inline;
+  /* border: 1px solid yellow; */
+  color: white;
+}
+.sun-desc > p {
+  margin: 0;
+  padding: 0;
 }
 
 .location {
   font-size: 38px;
   margin: 0 auto;
   color: white;
-  text-shadow: deeppink 0px 2px 1px;
 }
 
 .temperature-chart {
@@ -54,6 +69,8 @@ vars{
 .temperature {
   font-size: 72px;
   /* border: 1px solid blue; */
+  color: white;
+
   margin: 0;
   z-index: 10;
 }
@@ -63,12 +80,16 @@ vars{
   flex-direction: column;
   align-items: flex-start;
   z-index: 1;
+  color: white;
+  text-shadow: black 0px 1px 1px;
 }
 
 .temperature-min-max > p {
   font-size: 14px;
   /* border: 1px solid yellow; */
   margin: auto 0;
+  color: white;
+  text-shadow: black 0px 1px 1px;
 }
 
 .week-chart {

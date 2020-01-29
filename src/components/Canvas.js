@@ -6,8 +6,9 @@ import Temperature from './Temperature'
 import SunSetRise from './SunSetRise'
 import AnimationOfWeather from './AnimationOfWeather'
 import WeekChart from './WeekChart'
-import './Canvas.css'
 import Calls from '../services/Calls'
+
+import './Canvas.css'
 
 class Canvas extends Component {
   constructor() {
@@ -55,19 +56,46 @@ class Canvas extends Component {
     return dd;
   }
 
-  render() {
-    this.state.loaded ?
-      console.log(this.state.data, this.state.loaded, this.state.data.list[0].weather.description) : console.log("no");
+  getDayColor = () => {
+    //clear sky: #409cff
+    //high noon: fffffb
+    //snow: #ddddd
+    //rainy: 6d6d6d
+    //overcast: #c9e2ff
 
-    let time = new Date().toTimeString().slice(0, 9).split(':').join('');
+    let time = "153030"//new Date().toTimeString().slice(0, 9).split(':').join('');
+    let h = time.slice(0, 4)// light map to sunset and sunrise 0 to 23
 
-    console.log('time', time, parseInt(time), typeof time);
-    let numTime = '#' + parseInt(time).toString(16)+'A';
-    console.log('time', numTime, typeof numTime);
-    console.log('time', numTime);
+    let start = this.convertTimestamp(this.state.data.city.sunrise).toString().slice(0, 9).split(':').join('');
+    let end = this.convertTimestamp(this.state.data.city.sunset).toString().slice(0, 9).split(':').join('');
+
+    start = checkDigits(start);
+    end = checkDigits(end);
+
+    function checkDigits(num) {
+      if (num.toString().length < 4) {
+        return '0' + num
+      } else {
+        return num;
+      }
+    }
+
+    let b = 0
+    if (h >= start && h <= end) {
+      h = 190
+      b = 250
+    } else {
+      console.log('dentro', h);
+      h = "30";
+      b = "40"
+    }
 
 
+    console.log('components', h, start, end);
+    let mediaHex = h.toString(16) + h.toString(16) + (b).toString(16);
+    let numTime = "#" + mediaHex;
 
+    console.log('numtime', numTime, typeof numTime);
 
     const divStyle = {
       backgroundColor: numTime,
@@ -77,24 +105,52 @@ class Canvas extends Component {
       alignItems: 'center',
       paddingTop: '10vh'
     };
+    return divStyle;
+  }
 
+  range = (start, stop, step) => {
+    if (typeof stop == 'undefined') {
+      // one param defined
+      stop = start;
+      start = 0;
+    }
+
+    if (typeof step == 'undefined') {
+      step = 1;
+    }
+
+    if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+      return [];
+    }
+
+    var result = [];
+    for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
+      result.push(i);
+    }
+
+    return result;
+  };
+
+  render() {
     return (
-      <div style={divStyle}>
-        {this.state.loaded ?
+      <>
+        {(this.state.loaded && this.state.data.city.sunrise) ?
           (<>
-            <Location name={this.state.data.city.name} />
-            <WeatherDescription description={this.state.data.list[0].weather[0].description} />
-            <FeelsLike feelsLike={this.state.data.list[0].main.feels_like.toFixed(0)} />
-            <Temperature temp={this.state.data.list[0].main.temp.toFixed(0)} temp_max={this.state.data.list[0].main.temp_max.toFixed(0)} temp_min={this.state.data.list[0].main.temp_min.toFixed(0)} />
-            <AnimationOfWeather />
-            <SunSetRise sunset={this.convertTimestamp(this.state.data.city.sunset)} sunrise={this.convertTimestamp(this.state.data.city.sunrise)} />
-            {this.generateForecast()}
 
+            <div style={this.getDayColor()}>
+              <Location name={this.state.data.city.name} />
+              <WeatherDescription description={this.state.data.list[0].weather[0].description} />
+              <FeelsLike feelsLike={this.state.data.list[0].main.feels_like.toFixed(0)} />
+              <Temperature temp={this.state.data.list[0].main.temp.toFixed(0)} temp_max={this.state.data.list[0].main.temp_max.toFixed(0)} temp_min={this.state.data.list[0].main.temp_min.toFixed(0)} />
+              <AnimationOfWeather />
+              <SunSetRise sunset={this.convertTimestamp(this.state.data.city.sunset)} sunrise={this.convertTimestamp(this.state.data.city.sunrise)} />
+              {this.generateForecast()}
+            </div>
           </>)
           :
           (<p>loading...</p>)
         }
-      </div>
+      </>
     )
   }
 }
