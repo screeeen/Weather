@@ -32,8 +32,8 @@ class Canvas extends Component {
   }
 
   generateForecast = () => {
-    return <table >
-      <tbody className="week-chart">
+    return <table cellSpacing="0" cellPadding="0" className="week-chart">
+      <tbody >
         {this.state.data.list.map((day, index) => {
           return <WeekChart key={index} day={this.getDay(day.dt)} temp={day.main.temp} temp_max={day.main.temp_max} temp_min={day.main.temp_min} />
         })}
@@ -42,7 +42,6 @@ class Canvas extends Component {
   }
 
   convertTimestamp(timestamp) {
-    console.log('time', new Date(timestamp * 1000));
     var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
       mm = ('0' + (d.getMonth() + 1)).slice(-2),  // Months are zero based. Add leading 0.
       hh = d.getHours(),
@@ -52,8 +51,7 @@ class Canvas extends Component {
 
   getDay(timestamp) {
     var d = new Date(timestamp * 1000) // Convert the passed timestamp to milliseconds
-    var dd = (d.toDateString()).slice(0,3);         // Add leading 0.
-    console.log('dd', dd);
+    var dd = (d.toDateString()).slice(0, 3);         // Add leading 0.
     return dd;
   }
 
@@ -61,15 +59,34 @@ class Canvas extends Component {
     this.state.loaded ?
       console.log(this.state.data, this.state.loaded, this.state.data.list[0].weather.description) : console.log("no");
 
+    let time = new Date().toTimeString().slice(0, 9).split(':').join('');
+
+    console.log('time', time, parseInt(time), typeof time);
+    let numTime = '#' + parseInt(time).toString(16)+'A';
+    console.log('time', numTime, typeof numTime);
+    console.log('time', numTime);
+
+
+
+
+    const divStyle = {
+      backgroundColor: numTime,
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      paddingTop: '10vh'
+    };
+
     return (
-      <div className="canvas">
+      <div style={divStyle}>
         {this.state.loaded ?
           (<>
             <Location name={this.state.data.city.name} />
             <WeatherDescription description={this.state.data.list[0].weather[0].description} />
             <FeelsLike feelsLike={this.state.data.list[0].main.feels_like.toFixed(0)} />
             <Temperature temp={this.state.data.list[0].main.temp.toFixed(0)} temp_max={this.state.data.list[0].main.temp_max.toFixed(0)} temp_min={this.state.data.list[0].main.temp_min.toFixed(0)} />
-            {/* <AnimationOfWeather /> */}
+            <AnimationOfWeather />
             <SunSetRise sunset={this.convertTimestamp(this.state.data.city.sunset)} sunrise={this.convertTimestamp(this.state.data.city.sunrise)} />
             {this.generateForecast()}
 
