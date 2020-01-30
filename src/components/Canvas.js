@@ -6,7 +6,6 @@ import Temperature from './Temperature'
 import SunSetRise from './SunSetRise'
 import AnimationOfWeather from './AnimationOfWeather'
 import WeekChart from './WeekChart'
-import ButtonSettings from './ButtonSettings'
 import SettingsCanvas from './SettingsCanvas'
 
 import Calls from '../services/Calls'
@@ -28,23 +27,6 @@ function Canvas() {
       })
   }, []);
 
-  // useEffect(() => {
-  //   effect
-  //   return () => {
-  //     cleanup
-  //   };
-  // }, [showSettings])
-
-  const generateForecast = () => {
-    return <table cellSpacing="0" cellPadding="0" className="week-chart">
-      <tbody >
-        {data.list.map((day, index) => {
-          return <WeekChart key={index} day={getDay(day.dt)} temp={day.main.temp} temp_max={day.main.temp_max} temp_min={day.main.temp_min} />
-        })}
-      </tbody>
-    </table>
-  }
-
   const convertTimestamp = timestamp => {
     var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
       mm = ('0' + (d.getMonth() + 1)).slice(-2),  // Months are zero based. Add leading 0.
@@ -53,11 +35,7 @@ function Canvas() {
     return timehhmm;
   }
 
-  const getDay = timestamp => {
-    var d = new Date(timestamp * 1000) // Convert the passed timestamp to milliseconds
-    var dd = (d.toDateString()).slice(0, 3);         // Add leading 0.
-    return dd;
-  }
+
 
   const getDayColor = () => {
     //clear sky: #409cff
@@ -66,7 +44,7 @@ function Canvas() {
     //rainy: 6d6d6d
     //overcast: #c9e2ff
 
-    let time = "153030"//new Date().toTimeString().slice(0, 9).split(':').join('');
+    let time = new Date().toTimeString().slice(0, 9).split(':').join('');
     let h = time.slice(0, 4)// light map to sunset and sunrise 0 to 23
 
     let start = convertTimestamp(data.city.sunrise).toString().slice(0, 9).split(':').join('');
@@ -94,14 +72,10 @@ function Canvas() {
       h = "30";
       b = "40"
     }
-
-
     console.log('components', h, start, end);
     let mediaHex = h.toString(16) + h.toString(16) + (b).toString(16);
     let numTime = "#" + mediaHex;
-
     console.log('numtime', numTime, typeof numTime);
-
     const divStyle = {
       backgroundColor: numTime,
       width: '100%',
@@ -113,28 +87,6 @@ function Canvas() {
     return divStyle;
   }
 
-  const range = (start, stop, step) => {
-    if (typeof stop == 'undefined') {
-      // one param defined
-      stop = start;
-      start = 0;
-    }
-
-    if (typeof step == 'undefined') {
-      step = 1;
-    }
-
-    if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
-      return [];
-    }
-
-    var result = [];
-    for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
-      result.push(i);
-    }
-
-    return result;
-  };
 
   const handleClick = () => {
     showSettings ? setShowSettings(false) : setShowSettings(true);
@@ -154,7 +106,7 @@ function Canvas() {
             <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
             <AnimationOfWeather />
             <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
-            {generateForecast()}
+            <WeekChart data={data} />
           </div>
         </>)
         :

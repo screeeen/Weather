@@ -1,19 +1,25 @@
 import React from 'react'
+import WeekChartLine from './WeekChartLine'
 
-import Sun from './sun.svg'
 import './Canvas.css'
 
-export default function WeekChart(props) {
+
+export default function WeekChart({ data }) {
+  const getDay = timestamp => {
+    var d = new Date(timestamp * 1000) // Convert the passed timestamp to milliseconds
+    var dd = (d.toDateString()).slice(0, 3);         // Add leading 0.
+    return dd;
+  }
 
   return (
-    <>
-      <tr>
-        <td className="day-chart">{props.day}</td>
-        <td className="temp-chart">   {props.temp.toFixed(0)}º</td>
-        <td className="icon-chart"><img src={Sun} alt="sun" /></td>
-        <td className="max-chart">{props.temp_max.toFixed(0)}º</td>
-        <td className="min-chart">{props.temp_min.toFixed(0)}º</td>
-      </tr>
-    </>
+    <div>
+      <table cellSpacing="0" cellPadding="0" className="week-chart">
+        <tbody>
+          {data.list.map((day, index) => {
+            return <WeekChartLine key={index} day={getDay(day.dt)} temp={day.main.temp} temp_max={day.main.temp_max} temp_min={day.main.temp_min} />
+          })}
+        </tbody>
+      </table>
+    </div>
   )
 }
