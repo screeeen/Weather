@@ -74,10 +74,10 @@ function Canvas() {
     }
     console.log('components', h, start, end);
     let mediaHex = h.toString(16) + h.toString(16) + (b).toString(16);
-    let numTime = "#" + mediaHex;
+    let numTime = 'linear-gradient(#' + mediaHex + ',#333)' ;
     console.log('numtime', numTime, typeof numTime);
     const divStyle = {
-      backgroundColor: numTime,
+      background: numTime,
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -104,7 +104,7 @@ function Canvas() {
             <WeatherDescription description={data.list[0].weather[0].description} />
             <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
             <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
-            <AnimationOfWeather />
+            {/* <AnimationOfWeather /> */}
             <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
             <WeekChart data={data} />
           </div>

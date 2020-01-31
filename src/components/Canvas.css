@@ -40,12 +40,13 @@ vars {
 
 .sun-desc {
   font-size: 14px;
-  z-index: 10;
+  /* z-index: 10; */
   font-weight: bolder;
   /* align-self: flex-start; */
   display: inline;
   /* border: 1px solid yellow; */
   color: white;
+  padding: 0;
 }
 .sun-desc > p {
   margin: 0;
@@ -87,16 +88,15 @@ vars {
   font-size: 72px;
   /* border: 1px solid blue; */
   color: white;
-
-  margin: 0;
-  z-index: 10;
+  margin: 1vh 0;
+  /* z-index: 10; */
 }
 
 .temperature-min-max {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  z-index: 1;
+  /* z-index: 1; */
   color: white;
   text-shadow: black 0px 1px 1px;
 }
