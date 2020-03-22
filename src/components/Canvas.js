@@ -15,17 +15,25 @@ function Canvas() {
   const [data, setData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [city, setCity] = useState("Barcelona");
 
   useEffect(() => {
+    callWeather();
+  }, []);
+
+
+  const callWeather = () => {
     // Calls.get(`/data/2.5/weather?q=Barcelona&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
-    Calls.get(`/data/2.5/forecast?q=Vigo&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
+    //Calls.get(`/data/2.5/forecast?q=Barcelona&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
+    Calls.get(`/data/2.5/forecast?q=${city}&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
       // Calls.get(`/data/2.5/forecast/daily?lat=35&lon=139&cnt=10&appid=${process.env.REACT_APP_ENDPOINT}`)
       .then(res => {
         console.log("DATA:", res.data);
         setData(res.data);
         res.data.list ? (setLoaded(true)) : (setLoaded(false));
       })
-  }, []);
+  }
+
 
   const convertTimestamp = timestamp => {
     var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
@@ -74,7 +82,7 @@ function Canvas() {
     }
     console.log('components', h, start, end);
     let mediaHex = h.toString(16) + h.toString(16) + (b).toString(16);
-    let numTime = 'linear-gradient(#' + mediaHex + ',#333)' ;
+    let numTime = 'linear-gradient(#' + mediaHex + ',#333)';
     console.log('numtime', numTime, typeof numTime);
     const divStyle = {
       background: numTime,
@@ -89,8 +97,18 @@ function Canvas() {
 
 
   const handleClick = () => {
-    showSettings ? setShowSettings(false) : setShowSettings(true);
+    if (showSettings) {
+      callWeather();
+      setShowSettings(false)
+    } 
+    else {
+      setShowSettings(true);
+    }
   }
+
+  // const newCity = lacity => {
+  //   setCity(lacity);
+  // }
 
 
   return (
@@ -114,10 +132,11 @@ function Canvas() {
       }
       {showSettings ?
         (<>
-          <SettingsCanvas />
+          <SettingsCanvas state={{ city: [city, setCity], showSettings: [showSettings, setShowSettings] }} callWeather={{callWeather}} />
+          {/* <SettingsCanvas setCity={setCity} manolo={"manoelitoor"}/> */}
         </>
         ) : (<></>)}
-      <button className="button" onClick={handleClick}>+</button>
+      <button className="button" onClick={handleClick}>+◊◊◊+</button>
     </>
   )
 }
