@@ -4,7 +4,6 @@ import './Canvas.css'
 const SettingsCanvas = props => {
   useEffect(() => {
     console.log(props);
-    
   }, []);
 
   const {
@@ -16,13 +15,6 @@ const SettingsCanvas = props => {
     ...(props.state || {})
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    // setCity(event.target.value);
-    console.log('props',props);
-    console.log('hola',city,event.target.value);
-    props.callWeather();
-  }
 
   return (    
     <div className="settings" >
@@ -33,7 +25,7 @@ const SettingsCanvas = props => {
          <input type="text" name="name" value={city}
             onChange={e => setCity(e.target.value)} />
         </label>
-        <input type="submit" value="Submit" onSubmit={handleSubmit} />
+        {/* <button className="button" onClick={props.handleClick}>+◊◊◊+</button> */}
       </form>
     </div>
   )

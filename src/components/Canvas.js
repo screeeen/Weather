@@ -106,11 +106,6 @@ function Canvas() {
     }
   }
 
-  // const newCity = lacity => {
-  //   setCity(lacity);
-  // }
-
-
   return (
     <>
       {(loaded && !showSettings) ?
@@ -132,7 +127,7 @@ function Canvas() {
       }
       {showSettings ?
         (<>
-          <SettingsCanvas state={{ city: [city, setCity], showSettings: [showSettings, setShowSettings] }} callWeather={{callWeather}} />
+          <SettingsCanvas state={{ city: [city, setCity], showSettings: [showSettings, setShowSettings] }} callWeather={{callWeather}} handleClick={{handleClick}} />
           {/* <SettingsCanvas setCity={setCity} manolo={"manoelitoor"}/> */}
         </>
         ) : (<></>)}
