@@ -1,33 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import './Canvas.css'
+import {
+ Link
+} from "react-router-dom";
 
-const SettingsCanvas = props => {
+function SettingsCanvas (props) {
+  const [city,setCity] = useState(props.city)
+  const [cityCollection, addCity] = useState(props.cityCollection)
+
   useEffect(() => {
-    console.log(props);
+    populateHook();
   }, []);
 
-  const {
-    city: [city, setCity],
-    showSettings: [showSettings,setShowSettings]
-  } = {
-    city: useState(props),
-    showSettings : useState(props),
-    ...(props.state || {})
-  };
+  const populateHook = () => {
+    // setCity("");
+    addCity(props.cityCollection);
+    console.log(city,cityCollection);
+  }
 
 
-  return (    
-    <div className="settings" >
+  const handleSubmit = (event)=> {
+    event.preventDefault();
+    (!props.cityCollection.includes(city)) && 
+    props.addCity(cityCollection => [...cityCollection,city]);
+    props.setCity(city);
+  }
+
+
+  return (
+    <React.Fragment>
+    <div >
       {/* <p>we are settings, hello {props}</p> */}
-      <form >
-        <label>
-          Name:
-         <input type="text" name="name" value={city}
-            onChange={e => setCity(e.target.value)} />
-        </label>
-        {/* <button className="button" onClick={props.handleClick}>+◊◊◊+</button> */}
+      <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+         <input type="text" name="name" value={city} onChange={e => setCity(e.target.value)} />
+      </label>
+      <input type="submit" value="Done" />
+      <Link to="/" 
+      onClick={() => props.callWeather()}>
+      back
+      </Link>
       </form>
     </div>
+    </React.Fragment>
   )
 }
 
