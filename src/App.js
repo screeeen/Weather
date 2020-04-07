@@ -52,9 +52,7 @@ const App = () => {
         <button onClick={callWeather}>call </button>
         <Switch>
           <Route exact path="/settings" component={() => <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} addCity={addCity} cityCollection={cityCollection} />} />
-          {loaded &&(<Route exact path="/" component={() => <Canvas data={data} loaded={loaded} />} />)}
-          {/* <Route exact path="/canvas" component={() => <Canvas data={data} city={city} loaded={loaded} />} /> */}
-          {/* <Route exact path="/" component={() => <App />} /> */}
+          <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} setCity={setCity}/>} />
         </Switch>
       </Router>
     </div>

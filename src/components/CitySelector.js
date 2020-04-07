@@ -1,9 +1,19 @@
 import React from 'react'
 
-function CitySelector(props) {
+const CitySelector = (props) => {
+
+console.log(props);
+
   return (
     <>
-    <p className="weather-desc">{props.CityCollection}·····</p>
+      <p className="weather-desc">{props.CityCollection}·····</p>
+      { props.cityCollection.map((e,i) => {
+      return (
+
+        //callback on setcity para que pueda hacer el call???
+        <button key={i} onClick={() => {props.setCity(e);props.callWeather()}}>{e}</button>
+      )
+    })}
     </>
   )
 }

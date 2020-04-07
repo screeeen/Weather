@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useState,useEffect } from 'react';
 import Location from './Location'
 import CitySelector from './CitySelector'
 import WeatherDescription from './WeatherDescription'
@@ -10,15 +10,16 @@ import WeekChart from './WeekChart'
 import './Canvas.css'
 
 const Canvas = (props) => {
-  const [data, setData] = useState(props.data)
+const [data,setData] = useState(props.data)
 
   useEffect(() => {
     setData(props.data)
+    console.log(props);
   }, []);
 
 
 
-  // console.log('props: ',props);
+// console.log('props: ',props);
   const convertTimestamp = timestamp => {
     var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
       mm = ('0' + (d.getMonth() + 1)).slice(-2),  // Months are zero based. Add leading 0.
@@ -75,19 +76,25 @@ const Canvas = (props) => {
   }
 
 
-
-
   return (
-      <div style={getDayColor()}>
-        <Location name={data.city.name} />
-        <CitySelector cityCollection />
-        <WeatherDescription description={props.data.list[0].weather[0].description} />
-        <FeelsLike feelsLike={props.data.list[0].main.feels_like.toFixed(0)} />
-        <Temperature temp={props.data.list[0].main.temp.toFixed(0)} temp_max={props.data.list[0].main.temp_max.toFixed(0)} temp_min={props.data.list[0].main.temp_min.toFixed(0)} />
-        {/* <AnimationOfWeather /> */}
-        <SunSetRise sunset={convertTimestamp(props.data.city.sunset)} sunrise={convertTimestamp(props.data.city.sunrise)} />
-        <WeekChart data={props.data} />
-      </div>
+    <>
+      {props.loaded &&
+
+        (<>
+          <div style={getDayColor()}>
+            <Location name={data.city.name} />
+            <CitySelector setCity={props.setCity} cityCollection={props.cityCollection} callWeather={props.callWeather}/>
+            <WeatherDescription description={data.list[0].weather[0].description} />
+            <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
+            <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
+            {/* <AnimationOfWeather /> */}
+            <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
+            <WeekChart data={data} />
+
+          </div>
+        </>)
+      }
+    </>
   )
 }
 export default Canvas
