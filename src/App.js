@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  withRouter,
+  Route
 } from "react-router-dom";
 
 import Canvas from './components/Canvas'
 import SettingsCanvas from './components/SettingsCanvas';
 import Calls from './services/Calls'
 import CitySelector from './components/CitySelector'
+import ButtonBackPlus from './components/ButtonBackPlus'
 // import './reset.css'
 import './components/Canvas.css'
 import './index.css'
@@ -22,6 +21,7 @@ const App = () => {
   const [loaded, setLoaded] = useState(false);
   const [cityCollection, addCity] = useState(["Barcelona"])
   const [city, setCity] = useState("Barcelona");
+  const [settingsPageActive, setSettingsPageActive] = useState(false);
 
   useEffect(() => {
     callWeather(city)
@@ -42,14 +42,20 @@ const App = () => {
       })
   }
 
+
+  const setSettingsPage = () => {
+    settingsPageActive ? setSettingsPageActive(false) : setSettingsPageActive(true)
+  }
+
   return (
     <div>
       <Router>
         <nav>
+              <ButtonBackPlus setSettingsPageActive={setSettingsPageActive} settingsPageActive={settingsPageActive} />
+              <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />
           <ul>
             <CitySelector ChangeCity={ChangeCity} cityCollection={cityCollection}/>
             <li>
-              <Link to="/settings"> + </Link>
             </li>
           </ul>
         </nav>

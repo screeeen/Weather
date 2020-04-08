@@ -6,8 +6,8 @@ const CitySelector = (props) => {
       {props.cityCollection.map((e, i) => {
         return (
           //callback on setcity para que pueda hacer el call???
-          <li>
-            <button key={i} onClick={() => {
+          <li key={i}>
+            <button onClick={() => {
               props.ChangeCity(e);
             }}>{e}</button>
           </li>

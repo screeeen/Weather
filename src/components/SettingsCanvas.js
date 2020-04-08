@@ -36,10 +36,10 @@ function SettingsCanvas (props) {
          <input type="text" name="name" value={city} onChange={e => setCity(e.target.value)} />
       </label>
       <input type="submit" value="Done" />
-      <Link to="/" 
+      {/* <Link to="/" 
 >
       back
-      </Link>
+      </Link> */}
       </form>
     </div>
     </React.Fragment>
