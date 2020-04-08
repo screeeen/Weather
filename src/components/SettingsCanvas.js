@@ -38,7 +38,7 @@ function SettingsCanvas (props) {
       </label>
       <input type="submit" value="Done" />
       <Link to="/" 
-      onClick={() => props.callWeather()}>
+      onClick={() => props.callWeather(city)}>
       back
       </Link>
       </form>

@@ -18,16 +18,17 @@ const App = () => {
   const [city, setCity] = useState("Barcelona");
 
   useEffect(() => {
-    callWeather();
-    console.log('use effect app');
+    callWeather(city)
   }, []);
 
+  const ChangeCity = (cityName) => {
+    setCity(cityName);
+    callWeather(cityName);
+  }
 
 
-  const callWeather = () => {
-    // Calls.get(`/data/2.5/weather?q=Barcelona&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
-    //Calls.get(`/data/2.5/forecast?q=Barcelona&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
-    Calls.get(`/data/2.5/forecast?q=${city}&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
+  const callWeather = (cityName) => {
+    Calls.get(`/data/2.5/forecast?q=${cityName}&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
       // Calls.get(`/data/2.5/forecast/daily?lat=35&lon=139&cnt=10&appid=${process.env.REACT_APP_ENDPOINT}`)
       .then(res => {
         console.log("'calling: ", res.data.city);
@@ -52,7 +53,7 @@ const App = () => {
         <button onClick={callWeather}>call </button>
         <Switch>
           <Route exact path="/settings" component={() => <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} addCity={addCity} cityCollection={cityCollection} />} />
-          <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} setCity={setCity}/>} />
+          <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} ChangeCity={ChangeCity} setCity={setCity} />} />
         </Switch>
       </Router>
     </div>

@@ -14,7 +14,7 @@ const [data,setData] = useState(props.data)
 
   useEffect(() => {
     setData(props.data)
-    console.log(props);
+    // console.log(props);
   }, []);
 
 
@@ -83,7 +83,7 @@ const [data,setData] = useState(props.data)
         (<>
           <div style={getDayColor()}>
             <Location name={data.city.name} />
-            <CitySelector setCity={props.setCity} cityCollection={props.cityCollection} callWeather={props.callWeather}/>
+            <CitySelector setCity={props.setCity} ChangeCity={props.ChangeCity} cityCollection={props.cityCollection} callWeather={props.callWeather}/>
             <WeatherDescription description={data.list[0].weather[0].description} />
             <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
             <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
