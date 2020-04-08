@@ -51,10 +51,13 @@ const App = () => {
     <div>
       <Router>
         <nav>
-              <ButtonBackPlus setSettingsPageActive={setSettingsPageActive} settingsPageActive={settingsPageActive} />
-              <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />
+          <div id="search-widget">
+            <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />
+            <ButtonBackPlus setSettingsPageActive={setSettingsPageActive} settingsPageActive={settingsPageActive} />
+          </div>
           <ul>
-            <CitySelector ChangeCity={ChangeCity} cityCollection={cityCollection}/>
+            {/* tiene que ser scrollable */}
+            <CitySelector ChangeCity={ChangeCity} cityCollection={cityCollection} />
             <li>
             </li>
           </ul>

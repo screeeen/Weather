@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './Canvas.css'
-import {
- Link
-} from "react-router-dom";
+import './Canvas.css';
 
 function SettingsCanvas (props) {
-  const [city,setCity] = useState(props.city)
+  const [city,setCity] = useState("Write a city name...")
   const [cityCollection, addCity] = useState(props.cityCollection)
 
   useEffect(() => {
@@ -31,15 +28,8 @@ function SettingsCanvas (props) {
     <div >
       {/* <p>we are settings, hello {props}</p> */}
       <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-         <input type="text" name="name" value={city} onChange={e => setCity(e.target.value)} />
-      </label>
+         <input type="text" placeholder="Write a city here..." name="name" value={city} onChange={e => setCity(e.target.value)} />
       <input type="submit" value="Done" />
-      {/* <Link to="/" 
->
-      back
-      </Link> */}
       </form>
     </div>
     </React.Fragment>
