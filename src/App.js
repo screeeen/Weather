@@ -52,7 +52,7 @@ const App = () => {
         </nav>
         <button onClick={callWeather}>call </button>
         <Switch>
-          <Route exact path="/settings" component={() => <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} addCity={addCity} cityCollection={cityCollection} />} />
+          <Route exact path="/settings" component={() => <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />} />
           <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} ChangeCity={ChangeCity} setCity={setCity} />} />
         </Switch>
       </Router>

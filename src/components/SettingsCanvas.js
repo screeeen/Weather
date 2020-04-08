@@ -13,7 +13,6 @@ function SettingsCanvas (props) {
   }, []);
 
   const populateHook = () => {
-    // setCity("");
     addCity(props.cityCollection);
     console.log(city,cityCollection);
   }
@@ -23,7 +22,7 @@ function SettingsCanvas (props) {
     event.preventDefault();
     (!props.cityCollection.includes(city)) && 
     props.addCity(cityCollection => [...cityCollection,city]);
-    props.setCity(city);
+    props.ChangeCity(city);
   }
 
 
@@ -38,7 +37,7 @@ function SettingsCanvas (props) {
       </label>
       <input type="submit" value="Done" />
       <Link to="/" 
-      onClick={() => props.callWeather(city)}>
+>
       back
       </Link>
       </form>
