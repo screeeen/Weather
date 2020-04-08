@@ -1,6 +1,5 @@
 import React, {  useState,useEffect } from 'react';
 import Location from './Location'
-import CitySelector from './CitySelector'
 import WeatherDescription from './WeatherDescription'
 import FeelsLike from './FeelsLike'
 import Temperature from './Temperature'
@@ -9,12 +8,12 @@ import SunSetRise from './SunSetRise'
 import WeekChart from './WeekChart'
 import './Canvas.css'
 
+
 const Canvas = (props) => {
 const [data,setData] = useState(props.data)
 
   useEffect(() => {
     setData(props.data)
-    // console.log(props);
   }, []);
 
 
@@ -83,7 +82,6 @@ const [data,setData] = useState(props.data)
         (<>
           <div style={getDayColor()}>
             <Location name={data.city.name} />
-            <CitySelector setCity={props.setCity} ChangeCity={props.ChangeCity} cityCollection={props.cityCollection} callWeather={props.callWeather}/>
             <WeatherDescription description={data.list[0].weather[0].description} />
             <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
             <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />

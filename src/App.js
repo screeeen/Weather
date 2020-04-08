@@ -10,11 +10,17 @@ import {
 import Canvas from './components/Canvas'
 import SettingsCanvas from './components/SettingsCanvas';
 import Calls from './services/Calls'
+import CitySelector from './components/CitySelector'
+// import './reset.css'
+import './components/Canvas.css'
+import './index.css'
+
+
 
 const App = () => {
   const [data, setData] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [cityCollection, addCity] = useState(["Barcelona", "Berlin"])
+  const [cityCollection, addCity] = useState(["Barcelona"])
   const [city, setCity] = useState("Barcelona");
 
   useEffect(() => {
@@ -25,7 +31,6 @@ const App = () => {
     setCity(cityName);
     callWeather(cityName);
   }
-
 
   const callWeather = (cityName) => {
     Calls.get(`/data/2.5/forecast?q=${cityName}&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
@@ -42,15 +47,12 @@ const App = () => {
       <Router>
         <nav>
           <ul>
+            <CitySelector ChangeCity={ChangeCity} cityCollection={cityCollection}/>
             <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/settings">settings</Link>
+              <Link to="/settings"> + </Link>
             </li>
           </ul>
         </nav>
-        <button onClick={callWeather}>call </button>
         <Switch>
           <Route exact path="/settings" component={() => <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />} />
           <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} ChangeCity={ChangeCity} setCity={setCity} />} />
