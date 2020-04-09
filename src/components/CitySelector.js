@@ -1,16 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const CitySelector = (props) => {
   return (
     <>
       {props.cityCollection.map((e, i) => {
         return (
-          //callback on setcity para que pueda hacer el call???
           <li key={i}>
+            <Link to="/">
             <button onClick={() => {
               props.ChangeCity(e);
             }}>{e}</button>
-          </li>
+            </Link>
+          </li >
         )
       })}
     </>

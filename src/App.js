@@ -7,10 +7,10 @@ import {
 
 import Canvas from './components/Canvas'
 import SettingsCanvas from './components/SettingsCanvas';
+import CityList from './components/CityList';
 import Calls from './services/Calls'
 import CitySelector from './components/CitySelector'
 import ButtonBackPlus from './components/ButtonBackPlus'
-// import './reset.css'
 import './components/Canvas.css'
 import './index.css'
 
@@ -30,6 +30,15 @@ const App = () => {
   const ChangeCity = (cityName) => {
     setCity(cityName);
     callWeather(cityName);
+    setSettingsPageActive(false);
+  }
+
+  const DeleteCity = (cityToDelete) => {
+    let i = cityCollection.indexOf(cityToDelete);
+      cityCollection.splice(i,1);
+      addCity(cityCollection);
+      console.log(cityCollection.length-1,cityCollection[cityCollection.length-1]);
+      ChangeCity(cityCollection[cityCollection.length-1])
   }
 
   const callWeather = (cityName) => {
@@ -41,7 +50,6 @@ const App = () => {
         res.data.list ? (setLoaded(true)) : (setLoaded(false));
       })
   }
-
 
   const setSettingsPage = () => {
     settingsPageActive ? setSettingsPageActive(false) : setSettingsPageActive(true)
@@ -63,7 +71,7 @@ const App = () => {
           </ul>
         </nav>
         <Switch>
-          <Route exact path="/settings" component={() => <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />} />
+          <Route exact path="/settings" component={() => <CityList cityCollection={cityCollection} DeleteCity={DeleteCity}  />} />
           <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} ChangeCity={ChangeCity} setCity={setCity} />} />
         </Switch>
       </Router>

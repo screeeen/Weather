@@ -11,12 +11,15 @@ export default function WeekChart({ data }) {
     return dd;
   }
 
+  const dayIndexToDisplay = 5;
   return (
     <div>
       <table cellSpacing="0" cellPadding="0" className="week-chart">
         <tbody>
           {data.list.map((day, index) => {
+            if (index % dayIndexToDisplay === 0 ){
             return <WeekChartLine key={index} day={getDay(day.dt)} temp={day.main.temp} temp_max={day.main.temp_max} temp_min={day.main.temp_min} />
+            }  
           })}
         </tbody>
       </table>

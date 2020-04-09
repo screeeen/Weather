@@ -1,4 +1,4 @@
-import React, {  useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Location from './Location'
 import WeatherDescription from './WeatherDescription'
 import FeelsLike from './FeelsLike'
@@ -10,7 +10,7 @@ import './Canvas.css'
 
 
 const Canvas = (props) => {
-const [data,setData] = useState(props.data)
+  const [data, setData] = useState(props.data)
 
   useEffect(() => {
     setData(props.data)
@@ -18,7 +18,7 @@ const [data,setData] = useState(props.data)
 
 
 
-// console.log('props: ',props);
+  // console.log('props: ',props);
   const convertTimestamp = timestamp => {
     var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
       mm = ('0' + (d.getMonth() + 1)).slice(-2),  // Months are zero based. Add leading 0.
@@ -63,13 +63,10 @@ const [data,setData] = useState(props.data)
     }
     let mediaHex = h.toString(16) + h.toString(16) + (b).toString(16);
     let numTime = 'linear-gradient(#' + mediaHex + ',#333)';
+
     const divStyle = {
       background: numTime,
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      paddingTop: '10vh'
+      height: "100vh"
     };
     return divStyle;
   }
@@ -80,15 +77,18 @@ const [data,setData] = useState(props.data)
       {props.loaded &&
 
         (<>
-          <div style={getDayColor()}>
-            <Location name={data.city.name} />
-            <WeatherDescription description={data.list[0].weather[0].description} />
-            <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
-            <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
-            {/* <AnimationOfWeather /> */}
-            <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
-            <WeekChart data={data} />
-
+          <div className="weather-canvas" style={getDayColor()}>
+            <div className="details">
+              <Location name={data.city.name} />
+              <WeatherDescription description={data.list[0].weather[0].description} />
+              <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
+              <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
+              {/* <AnimationOfWeather /> */}
+              <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
+            </div>
+            <div className="table">
+              <WeekChart data={data} />
+            </div>
           </div>
         </>)
       }

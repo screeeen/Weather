@@ -2,23 +2,6 @@ vars {
     --yellow: #00ff00;
 }
 
-.canvas {
-    width: 100%;
-    /* background-color: lightblue; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10vh 10vw 0;
-    /* transform: rotateX(60deg) rotateY(0deg) rotateZ(-45deg); */
-}
-
-
-/* .degrees {
-  font-size: 48px;
-  top:0;
-  position:relative;
-} */
-
 .weather-desc {
     font-size: 12px;
     margin: 6px 2px;
@@ -155,4 +138,25 @@ img {
     background-color: lightblue;
     transform: skew(-30deg);
     box-shadow: 6px 6px 1px 1px rgba(0, 0, 255, 0.2);
+}
+
+.weather-canvas {
+    display: flex;
+    flex-flow: row nowrap;
+    /* justify-content: space-evenly; */
+    padding-top: '10vh';
+    /* border: 1px solid red; */
+}
+
+.weather-canvas>div {}
+
+.details {
+    padding: 10%;
+    /* border: 1px solid black; */
+}
+
+.table {
+    padding: 2%;
+    /* overflow: scroll */
+    /* border: 1px solid black; */
 }

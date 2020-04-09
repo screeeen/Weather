@@ -2,20 +2,19 @@ import React from 'react';
 import {
   Link
 } from "react-router-dom";
+import settingsIcon from './settingsIcon.svg'; 
 
 const ButtonBackPlus = (props) => {
 
-  console.log(props);
-  
 
 return (
-  <div>
+  <>
     {props.settingsPageActive ? 
-    <Link onClick={()=>props.setSettingsPageActive(false)} id="add-button" to="/"><button>back</button></Link>
+    <Link onClick={()=>props.setSettingsPageActive(false)} to="/"><img src={settingsIcon} alt="settingsIcon"/></Link>
     :
-    <Link onClick={()=>props.setSettingsPageActive(true)} id="add-button" to="/settings"><button>+</button></Link>
+    <Link onClick={()=>props.setSettingsPageActive(true)} to="/settings"><img src={settingsIcon} alt="settingsIcon"/></Link>
     }
-  </div>
+  </>
 )
 }
 
