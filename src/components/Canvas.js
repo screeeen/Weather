@@ -7,6 +7,8 @@ import SunSetRise from './SunSetRise'
 // import AnimationOfWeather from './AnimationOfWeather'
 import WeekChart from './WeekChart'
 import './Canvas.css'
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
+
 
 
 const Canvas = (props) => {
@@ -79,15 +81,30 @@ const Canvas = (props) => {
         (<>
           <div className="weather-canvas" style={getDayColor()}>
             <div className="details">
-              <Location name={data.city.name} />
-              <WeatherDescription description={data.list[0].weather[0].description} />
-              <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
-              <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
-              {/* <AnimationOfWeather /> */}
-              <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
+              <CSSTransitionGroup
+                transitionName="example"
+                transitionAppear={true}
+                transitionAppearTimeout={4000}
+                transitionEnter={false}
+                transitionLeave={false}>
+                <Location name={data.city.name} />
+                <WeatherDescription description={data.list[0].weather[0].description} />
+                <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
+                <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
+                {/* <AnimationOfWeather /> */}
+                <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
+              </CSSTransitionGroup>
             </div>
             <div className="table">
+            <CSSTransitionGroup
+                transitionName="example"
+                transitionAppear={true}
+                transitionAppearTimeout={4000}
+                transitionEnter={true}
+                transitionLeave={true}>
               <WeekChart data={data} />
+              </CSSTransitionGroup>
+
             </div>
           </div>
         </>)

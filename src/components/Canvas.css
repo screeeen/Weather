@@ -37,14 +37,15 @@ vars {
     /* border: 1px solid red; */
 }
 
-.button {
+
+/* .button {
     display: inline;
     position: absolute;
     background-color: darkgreen;
     bottom: 0;
     right: 0;
     padding: 10px;
-}
+} */
 
 .settings {
     height: 100%;
@@ -82,7 +83,8 @@ vars {
 }
 
 .week-chart {
-    background-color: #fff;
+    /* background-color: #fff; */
+    color: whitesmoke;
     border-radius: 15px;
     padding: 20px;
     /* position: absolute; */
@@ -92,6 +94,13 @@ vars {
     box-shadow: dimgray;
     margin: 20px auto;
     border: none;
+}
+
+.weather-icon {
+    color: whitesmoke;
+    fill: whitesmoke;
+    /* background-color: white;
+    border-radius: 25px; */
 }
 
 .day-chart {
@@ -159,4 +168,22 @@ img {
     padding: 2%;
     /* overflow: scroll */
     /* border: 1px solid black; */
+}
+
+.example-appear {
+    opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+    opacity: 1;
+    transition: opacity .8s ease-in;
+}
+
+.example-leave {
+    opacity: 1;
+}
+
+.example-leave.example-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
 }

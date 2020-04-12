@@ -11,6 +11,7 @@ import CityList from './components/CityList';
 import Calls from './services/Calls'
 import CitySelector from './components/CitySelector'
 import ButtonBackPlus from './components/ButtonBackPlus'
+import GeolocationWidget from './components/GeolocationWidget'
 import './components/Canvas.css'
 import './index.css'
 
@@ -22,6 +23,7 @@ const App = () => {
   const [cityCollection, addCity] = useState(["Barcelona"])
   const [city, setCity] = useState("Barcelona");
   const [settingsPageActive, setSettingsPageActive] = useState(false);
+  const [coordinates,setCoordinates] =useState(null)
 
   useEffect(() => {
     callWeather(city)
@@ -51,8 +53,24 @@ const App = () => {
       })
   }
 
+  const callCurrentSpotWeather = (coors) => {
+    const {latitude,longitude} = coors;
+    // Calls.get(`/data/2.5/forecast?q=${cityName}&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)
+      Calls.get(`/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&cnt=10&appid=${process.env.REACT_APP_ENDPOINT}`)
+      .then(res => {
+        console.log("'calling: ", res.data.city);
+        setData(res.data);
+        res.data.list ? (setLoaded(true)) : (setLoaded(false));
+      })
+  }
+
   const setSettingsPage = () => {
     settingsPageActive ? setSettingsPageActive(false) : setSettingsPageActive(true)
+  }
+
+  const setCoordinatesAndShowWeather = (coors) =>{
+    setCoordinates(coors);
+    callCurrentSpotWeather (coors);
   }
 
   return (
@@ -60,6 +78,7 @@ const App = () => {
       <Router>
         <nav>
           <div id="search-widget">
+            <GeolocationWidget setCoordinates={setCoordinates} setCoordinatesAndShowWeather={setCoordinatesAndShowWeather}/>
             <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />
             <ButtonBackPlus setSettingsPageActive={setSettingsPageActive} settingsPageActive={settingsPageActive} />
           </div>
