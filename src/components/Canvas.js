@@ -10,19 +10,13 @@ import Datecomp from './Datecomp'
 import './Canvas.css'
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
-
-
 const Canvas = (props) => {
   const [data, setData] = useState(props.data)
-  const [time,setTime] = useState('');
 
   useEffect(() => {
     setData(props.data)
   }, []);
 
-
-
-  // console.log('props: ',props);
   const convertTimestamp = timestamp => {
     var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
       mm = ('0' + (d.getMonth() + 1)).slice(-2),  // Months are zero based. Add leading 0.
@@ -91,16 +85,14 @@ const Canvas = (props) => {
                 <Location name={data.city.name} />
                 <Datecomp date={data.list[0].dt} />
                 <WeatherDescription description={data.list[0].weather[0].description} />
-                <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
                 <Temperature temp={data.list[0].main.temp.toFixed(0)} temp_max={data.list[0].main.temp_max.toFixed(0)} temp_min={data.list[0].main.temp_min.toFixed(0)} />
+                <FeelsLike feelsLike={data.list[0].main.feels_like.toFixed(0)} />
                 {/* <AnimationOfWeather /> */}
                 <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
               </CSSTransitionGroup>
             </div>
             <div className="table">
-
               <WeekChart data={data} />
-
             </div>
           </div>
         </>)
