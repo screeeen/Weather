@@ -29,8 +29,7 @@ function SettingsCanvas(props) {
         {/* <p>we are settings, hello {props}</p> */}
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="enter your city"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = 'enter your text'" name="name" value={city} onChange={e => setCity(e.target.value)} />
+            name="name" value={city} onChange={e => setCity(e.target.value)} />
           <input type="submit" value="+" />
         </form>
       </div>
