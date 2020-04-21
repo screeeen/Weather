@@ -7,7 +7,7 @@ import SunSetRise from './SunSetRise'
 // import AnimationOfWeather from './AnimationOfWeather'
 import WeekChart from './WeekChart'
 import Datecomp from './Datecomp'
-import './Canvas.css'
+import '../index.css'
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 const Canvas = (props) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Canvas.css'
+import '../index.css'
 
 export default function Temperature(props) {
   return (

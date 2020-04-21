@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <button id="buttonSet">button</button>
+    <p id="pepe"></p>
+    <p id="ite"></p>
+
+    <script>
+        var button = document.querySelector("#buttonSet");
+        var para = document.querySelector("#pepe");
+        var ite = document.querySelector("#ite");
+        var t = 0;
+
+        button.onclick = function() {
+            t += 1;
+            console.log('t: ', t);
+            return t;
+        };
+        para.innerHTML = 't: ' + t;
+
+        // recursive div
+        var recursiveDiv = function(divend, divsor) {
+            if (divsor > divend) {
+                return 0;
+            } else {
+                return 1 + recursiveDiv(divend - divsor, divsor);
+            }
+        }
+
+        //ite div
+        var iterativeDiv = function(divend, divsor) {
+            var cociente = 0;
+            while (divend > 0) {
+                cociente++;
+                divend = divend - divsor;
+                console.log('c', divend, divsor, cociente);
+            }
+            return cociente;
+        }
+
+
+        // hilos 
+        var metodo = function() {
+            while (true) {
+                console.log('*');
+                try {
+                    console.log('**');
+                    wait();
+                } catch (e) {
+
+                }
+            }
+        }
+
+        // metodo();
+        para.innerHTML = 'result Recu: ' + recursiveDiv(10, 2);
+        ite.innerHTML = 'result Ite: ' + iterativeDiv(10, 2);
+    </script>
+
+</body>
+
+</html>

@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const CitySelector = (props) => {
+const CitySelector = ({changeCity,cityCollection}) => {
   return (
     <>
-      {props.cityCollection.map((e, i) => {
+      {cityCollection.map((cityName, i) => {
         return (
           <li key={i}>
             <Link to="/">
-            <button onClick={() => {
-              props.ChangeCity(e);
-            }}>{e}</button>
+            <button autoFocus onClick={() => {
+              changeCity(cityName);
+            }}>{cityName}</button>
             </Link>
           </li >
         )

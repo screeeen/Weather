@@ -12,7 +12,6 @@ import Calls from './services/Calls'
 import CitySelector from './components/CitySelector'
 import ButtonBackPlus from './components/ButtonBackPlus'
 // import GeolocationWidget from './components/GeolocationWidget'
-import './components/Canvas.css'
 import './index.css'
 
 
@@ -25,11 +24,12 @@ const App = () => {
   const [settingsPageActive, setSettingsPageActive] = useState(false);
   const [coordinates, setCoordinates] = useState(null)
 
+
   useEffect(() => {
     callWeather(city)
   }, []);
 
-  const ChangeCity = (cityName) => {
+  const changeCity = (cityName) => {
     setCity(cityName);
     callWeather(cityName);
     setSettingsPageActive(false);
@@ -39,7 +39,7 @@ const App = () => {
     let i = cityCollection.indexOf(cityToDelete);
     cityCollection.splice(i, 1);
     addCity(cityCollection);
-    ChangeCity(cityCollection[cityCollection.length - 1])
+    changeCity(cityCollection[cityCollection.length - 1])
   }
 
   const callWeather = (cityName) => {
@@ -75,27 +75,27 @@ const App = () => {
   }
 
   return (
-    <div>
+    <>
       <Router>
         <nav>
           <div id="search-widget">
             {/* <GeolocationWidget setCoordinates={setCoordinates} setCoordinatesAndShowWeather={setCoordinatesAndShowWeather}/> */}
-            <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} ChangeCity={ChangeCity} addCity={addCity} cityCollection={cityCollection} />
+            <SettingsCanvas city={city} setLoaded={setLoaded} callWeather={callWeather} setCity={setCity} changeCity={changeCity} addCity={addCity} cityCollection={cityCollection} />
             <ButtonBackPlus setSettingsPageActive={setSettingsPageActive} settingsPageActive={settingsPageActive} />
           </div>
           <ul>
             {/* tiene que ser scrollable */}
-            <CitySelector ChangeCity={ChangeCity} cityCollection={cityCollection} />
+            <CitySelector changeCity={changeCity} cityCollection={cityCollection} />
             <li>
             </li>
           </ul>
         </nav>
         <Switch>
           <Route exact path="/settings" component={() => <CityList cityCollection={cityCollection} DeleteCity={DeleteCity} />} />
-          <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} ChangeCity={ChangeCity} setCity={setCity} />} />
+          <Route exact path="/" component={() => <Canvas data={data} loaded={loaded} cityCollection={cityCollection} callWeather={callWeather} changeCity={changeCity} setCity={setCity} />} />
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 

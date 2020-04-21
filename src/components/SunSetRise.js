@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './Canvas.css'
+import '../index.css'
 
 
 export default function SunSetRise(props) {

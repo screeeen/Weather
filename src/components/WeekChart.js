@@ -1,6 +1,6 @@
 import React from 'react'
 import WeekChartLine from './WeekChartLine'
-import './Canvas.css'
+import '../index.css'
 
 const WeekChart = ({ data }) => {
 
@@ -13,7 +13,9 @@ const WeekChart = ({ data }) => {
   const dayIndexToDisplay = 6;
   return (
     <div>
+
       <table cellSpacing="0" cellPadding="0" className="week-chart">
+    {/* <h6 className='location'>Forecast</h6> */}
         <tbody>
           {data.list.map((day, index) => {
             if (index % dayIndexToDisplay === 0) {

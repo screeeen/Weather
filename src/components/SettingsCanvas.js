@@ -1,39 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import './Canvas.css';
+import React, { useState } from 'react';
+import '../index.css';
 
-function SettingsCanvas(props) {
-  const [city, setCity] = useState("")
-  const [cityCollection, addCity] = useState(props.cityCollection)
-
-  useEffect(() => {
-    populateHook();
-  }, []);
-
-  const populateHook = () => {
-    addCity(props.cityCollection);
-  }
-
+function SettingsCanvas({ city, setCity, changeCity, addCity, cityCollection }) {
+const [search,setSearch] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    (!props.cityCollection.includes(city)) &&
-      props.addCity(cityCollection => [...cityCollection, city]);
-    props.ChangeCity(city);
+    (!cityCollection.includes(search)) &&
+      addCity(cityCollection => [...cityCollection, search]);
+    changeCity(search);
     setCity("")
   }
 
 
   return (
-    <React.Fragment>
+    <>
       <div >
-        {/* <p>we are settings, hello {props}</p> */}
+        {/* <p>we are settings, hello {}</p> */}
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="enter your city"
-            name="name" value={city} onChange={e => setCity(e.target.value)} />
+            name="name" value={search} onChange={e => setSearch(e.target.value)} />
           <input type="submit" value="+" />
         </form>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

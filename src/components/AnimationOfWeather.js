@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './Canvas.css'
+import '../Index.css'
 import './Cube.css'
 
 export default function AnimationOfWeather() {
