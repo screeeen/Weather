@@ -7,6 +7,7 @@ import SunSetRise from './SunSetRise'
 // import AnimationOfWeather from './AnimationOfWeather'
 import WeekChart from './WeekChart'
 import Datecomp from './Datecomp'
+import Chartcompo from './Chartcompo'
 import '../index.css'
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
@@ -90,6 +91,9 @@ const Canvas = (props) => {
                 {/* <AnimationOfWeather /> */}
                 <SunSetRise sunset={convertTimestamp(data.city.sunset)} sunrise={convertTimestamp(data.city.sunrise)} />
               </CSSTransitionGroup>
+            </div>
+            <div className="chart">
+            <Chartcompo data={data}/>
             </div>
             <div className="table">
               <WeekChart data={data} />
