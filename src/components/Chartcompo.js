@@ -1,21 +1,21 @@
 import React from 'react'
 import { GetDay } from './Utils'
-import { Doughnut, Bar } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 const Chartcompo = ({ data }) => {
   const labels = data.list.map(e => GetDay(e.main.dt));
   const temperatureDataset = data.list.map(e => e.main.temp);
+  console.log(data.list);
+  
 
-  console.log(temperatureDataset);
-
-  const cosa = {
+  const config = {
     labels: labels,
     datasets: [
       {
         label: 'Forecast',
         barPercentage: 0.5,
         barThickness: 3,
-        maxBarThickness: 8,
+        maxBarThickness: 80,
         minBarLength: 2,
         backgroundColor: 'white',
         borderSkipped: 'top',
@@ -23,34 +23,46 @@ const Chartcompo = ({ data }) => {
         data: temperatureDataset
       }
     ],
-    options: {
-      legend: {
-        labels: {
-          // This more specific font property overrides the global property
-          fontColor: 'white'
+  }
+
+  const options = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        ticks : {
+          fontColor: '#fff'
         },
-        scales: {
-          xAxes: [{
-            display: true,
-            gridLines: {
-              display: false
-            }  
-          }],
-          yAxes: [{
-            display: true,
-            gridLines: {
-              display: false
-            }
-          }]
+        gridLines: {
+          display: true,
+          color: '#bcbcf600'
+        },
+
+      }],
+      yAxes: [{
+        ticks: {
+          fontColor: '#fff',
+          callback: function (value, index, values) {
+            return value + ' º';
+          }
+        },
+        stacked: true,
+        gridLines: {
+          display: true,
+          color: '#bcbcf6',
+          drawOnChartArea: false,
         }
-      }
+      }]
+    },
+    legend: {
+      display: false,
+      labels: {
+        fontColor: 'white'
+      },
     }
   }
 
   return (
-    <>
-      <Bar data={cosa} />
-    </>
+    <Bar data={config} options={options} />
   )
 }
 
