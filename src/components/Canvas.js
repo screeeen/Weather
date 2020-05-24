@@ -17,9 +17,8 @@ const Canvas = (props) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const cityToCall = (props.city || 'Nuuk')
-    callWeather(cityToCall, setData, setLoaded)
-    console.log('canvas ef', data, props.city, loaded)
+    props.city && callWeather(props.city, setData, setLoaded)
+    console.log('canvas ef', data, props.city,loaded)
   }, [props.city]);
 
   return (

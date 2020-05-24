@@ -15,15 +15,18 @@ import './index.css'
 const App = () => {
 
   const [city, setCity] = useState(null);
-  const [cityCollection, addCity] = useState(["Barcelona"])
+  const [cityCollection, addCity] = useState([])
   const [settingsPageActive, setSettingsPageActive] = useState(false);
 
 
   useEffect(() => {
-    console.log('app ef',city);
+    console.log('app ef', city);
+    if (city === null) { changeCity('Nuuk') }
+
   }, [city]);
 
   const changeCity = (cityName) => {
+    addCity(cityCollection => [...cityCollection, cityName]);
     setCity(cityName);
     setSettingsPageActive(false);
   }
@@ -56,7 +59,7 @@ const App = () => {
         </nav>
         <Switch>
           <Route exact path="/settings" component={() => <CityList cityCollection={cityCollection} DeleteCity={DeleteCity} />} />
-          <Route exact path="/" component={() => <Canvas city={city} cityCollection={cityCollection} changeCity={changeCity} setCity={setCity} />} />
+          <Route exact path="/" component={() => <Canvas city={city} updateCity={changeCity} />} />
         </Switch>
       </Router>
     </>

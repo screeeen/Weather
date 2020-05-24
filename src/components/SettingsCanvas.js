@@ -7,7 +7,7 @@ const [search,setSearch] = useState("")
   const handleSubmit = (event) => {
     event.preventDefault();
     (!cityCollection.includes(search)) &&
-      addCity(cityCollection => [...cityCollection, search]);
+      // addCity(cityCollection => [...cityCollection, search]);
     changeCity(search);
     setSearch("")
   }
