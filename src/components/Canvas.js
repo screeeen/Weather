@@ -9,24 +9,24 @@ import Datecomp from './Datecomp'
 import Chartcompo from './Chartcompo'
 import '../index.css'
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
-import {callWeather} from './GetWeather'
-import {getDayColor,convertTimestamp} from './Utils'
+import { callWeather } from './GetWeather'
+import { getDayColor, convertTimestamp } from './Utils'
 
 const Canvas = (props) => {
   const [data, setData] = useState({})
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    props.city && callWeather(props.city,setData,setLoaded)
-    console.log ('canvas ef',data, props.city)
+    const cityToCall = (props.city || 'Nuuk')
+    callWeather(cityToCall, setData, setLoaded)
+    console.log('canvas ef', data, props.city, loaded)
   }, [props.city]);
 
   return (
     <>
       {loaded && data &&
         (<>
-     { console.log('calling canvas',loaded,data)}
-          <div className="weather-canvas" style={getDayColor(data.city.sunrise,data.city.sunset)}>
+          <div className="weather-canvas" style={getDayColor(data.city.sunrise, data.city.sunset)}>
             <div className="details">
               <CSSTransitionGroup
                 transitionName="example"
@@ -44,7 +44,7 @@ const Canvas = (props) => {
               </CSSTransitionGroup>
             </div>
             <div className="chart">
-            <Chartcompo data={data}/>
+              <Chartcompo data={data} />
             </div>
             <div className="table">
               <WeekChart data={data} />

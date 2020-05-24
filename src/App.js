@@ -13,9 +13,8 @@ import ButtonBackPlus from './components/ButtonBackPlus'
 import './index.css'
 
 const App = () => {
-  // const [data, setData] = useState([]);
-  // const [loaded,setLoaded] = useState(false);
-  const [city, setCity] = useState("Barcelona");
+
+  const [city, setCity] = useState(null);
   const [cityCollection, addCity] = useState(["Barcelona"])
   const [settingsPageActive, setSettingsPageActive] = useState(false);
 
