@@ -8,7 +8,6 @@ import {
 import Canvas from './components/Canvas'
 import SettingsCanvas from './components/SettingsCanvas';
 import CityList from './components/CityList';
-import {callWeather} from './components/GetWeather'
 import CitySelector from './components/CitySelector'
 import ButtonBackPlus from './components/ButtonBackPlus'
 import './index.css'
@@ -22,8 +21,7 @@ const App = () => {
 
 
   useEffect(() => {
-    console.log('city useeffect canvas',city);
-    // callWeather(city,setData,setLoaded)
+    console.log('app ef',city);
   }, [city]);
 
   const changeCity = (cityName) => {

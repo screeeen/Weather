@@ -9,7 +9,7 @@ const [search,setSearch] = useState("")
     (!cityCollection.includes(search)) &&
       addCity(cityCollection => [...cityCollection, search]);
     changeCity(search);
-    setCity("")
+    setSearch("")
   }
 
 
