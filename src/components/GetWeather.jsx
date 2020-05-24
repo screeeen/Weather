@@ -1,4 +1,4 @@
-import Calls from './services/Calls'
+import Calls from '../services/Calls'
 
 export const callWeather = (cityName,setData,setLoaded) => {
   Calls.get(`/data/2.5/forecast?q=${cityName}&cnt=40&units=metric&appid=${process.env.REACT_APP_ENDPOINT}`)

@@ -10,13 +10,17 @@ import Datecomp from './Datecomp'
 import Chartcompo from './Chartcompo'
 import '../index.css'
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
+import {callWeather} from './GetWeather'
 
 const Canvas = (props) => {
   const [data, setData] = useState(props.data)
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setData(props.data)
-  }, []);
+    console.log ('canvas',props.city)
+    props.city && callWeather(props.city,setData,setLoaded)
+    // setData(props.data)
+  }, [props]);
 
   const convertTimestamp = timestamp => {
     var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
@@ -32,14 +36,10 @@ const Canvas = (props) => {
     //snow: #ddddd
     //rainy: 6d6d6d
     //overcast: #c9e2ff
-
     let time = new Date().toTimeString().slice(0, 9).split(':').join('');
     let h = time.slice(0, 4)// light map to sunset and sunrise 0 to 23
-
-    let start = convertTimestamp(props.data.city.sunrise).toString().slice(0, 9).split(':').join('');
-    let end = convertTimestamp(props.data.city.sunset).toString().slice(0, 9).split(':').join('');
-
-
+    let start = convertTimestamp(data.city.sunrise).toString().slice(0, 9).split(':').join('');
+    let end = convertTimestamp(data.city.sunset).toString().slice(0, 9).split(':').join('');
     const checkDigits = (num) => {
       if (num.toString().length < 4) {
         return '0' + num
@@ -47,11 +47,8 @@ const Canvas = (props) => {
         return num;
       }
     }
-
     start = checkDigits(start);
     end = checkDigits(end);
-
-
     let b = 0
     if (h >= start && h <= end) {
       h = 190
@@ -62,7 +59,6 @@ const Canvas = (props) => {
     }
     let mediaHex = h.toString(16) + h.toString(16) + (b).toString(16);
     let numTime = 'linear-gradient(#' + mediaHex + ',#333)';
-
     const divStyle = {
       background: numTime,
       height: "80vh"
@@ -70,11 +66,11 @@ const Canvas = (props) => {
     return divStyle;
   }
 
-
   return (
     <>
-      {props.loaded &&
+      {loaded && data &&
         (<>
+     { console.log('calling canvas',loaded)}
           <div className="weather-canvas" style={getDayColor()}>
             <div className="details">
               <CSSTransitionGroup

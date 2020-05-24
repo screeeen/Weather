@@ -7,6 +7,7 @@ const Chartcompo = ({ data }) => {
   const temperatureDataset = data.list.map(e => e.main.temp);
 
   console.log(temperatureDataset);
+
   const cosa = {
     labels: labels,
     datasets: [
@@ -33,7 +34,7 @@ const Chartcompo = ({ data }) => {
             display: true,
             gridLines: {
               display: false
-            }
+            }  
           }],
           yAxes: [{
             display: true,
@@ -45,9 +46,6 @@ const Chartcompo = ({ data }) => {
       }
     }
   }
-
-
-
 
   return (
     <>
