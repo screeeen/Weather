@@ -13,7 +13,7 @@ const WeekChart = ({ data }) => {
           {data.list.map((day, index) => {
             if (index % dayIndexToDisplay === 0) {
               return <WeekChartLine key={index} iconId={day.weather[0].icon} day={GetDay(day.dt)} temp={day.main.temp} temp_max={day.main.temp_max} temp_min={day.main.temp_min} />
-            }
+            } else return null
           })}
         </tbody>
       </table>

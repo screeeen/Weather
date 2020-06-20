@@ -1,15 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const CitySelector = ({changeCity,cityCollection}) => {
+const CitySelector = ({updateCity,cities}) => {
   return (
     <>
-      {cityCollection.map((cityName, i) => {
+    {console.log(cities)}
+      {cities.map((cityName, i) => {
         return (
           <li key={i}>
             <Link to="/">
             <button autoFocus onClick={() => {
-              changeCity(cityName);
+              updateCity(cityName);
             }}>{cityName}</button>
             </Link>
           </li >
