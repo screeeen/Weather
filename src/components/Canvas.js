@@ -19,7 +19,7 @@ const Canvas = (props) => {
   useEffect(() => {
     props.city && callWeather(props.city, setData, setLoaded)
     console.log('canvas ef', data, props.city,loaded)
-  }, [props.city,data,loaded]);
+  }, [props.city]);
 
   return (
     <>

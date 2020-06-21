@@ -25,12 +25,15 @@ const reducer = (state, action) => {
     case ACTIONS.ADD_CITY:
       return {
         ...state,
-        cities:[...state.cities, action.payload],
+        cities: [...state.cities, action.payload],
       };
     case ACTIONS.DELETE_CITY:
+      let newArray = state.cities.slice();
+      const i = newArray.indexOf(action.payload);
+      newArray.splice(i, 1);
       return {
         ...state,
-        cities: action.payload,
+        cities: newArray,
       };
     case ACTIONS.SET_SETTINGS_PAGE:
       return {
@@ -64,8 +67,6 @@ const App = () => {
   }, [city]);
 
   const DeleteCity = (cityToDelete) => {
-    const i = cities.indexOf(cityToDelete);
-    cities.splice(i, 1);
     dispatch({ type: ACTIONS.DELETE_CITY, payload: cityToDelete });
     dispatch({ type: ACTIONS.UPDATE_CITY, payload: cities[cities.length - 1] });
   };
