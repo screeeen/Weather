@@ -12,14 +12,13 @@ import { CSSTransitionGroup } from 'react-transition-group' // ES6
 import { callWeather } from './GetWeather'
 import { getDayColor, convertTimestamp } from './Utils'
 
-const Canvas = (props) => {
+const Canvas = ({city}) => {
   const [data, setData] = useState({})
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    props.city && callWeather(props.city, setData, setLoaded)
-    console.log('canvas ef', data, props.city,loaded)
-  }, [props.city]);
+    city && callWeather(city, setData, setLoaded)
+  }, [city]);
 
   return (
     <>

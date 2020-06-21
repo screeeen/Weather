@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import '../index.css';
 
-function SettingsCanvas({ setCity, changeCity, addCity, cityCollection }) {
+function SettingsCanvas({ addCity, cityCollection }) {
 const [search,setSearch] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault();
     (!cityCollection.includes(search)) &&
-      // addCity(cityCollection => [...cityCollection, search]);
-    changeCity(search);
+    addCity(search);
     setSearch("")
   }
 

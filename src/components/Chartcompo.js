@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 const Chartcompo = ({ data }) => {
   const labels = data.list.map(e => GetDay(e.main.dt));
   const temperatureDataset = data.list.map(e => e.main.temp);
-  console.log(data.list);
+  // console.log(data.list);
   
 
   const config = {
